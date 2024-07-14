@@ -1,0 +1,6 @@
+# Include the main and test requirements file
+-r requirements-test.txt
+
+mypy==1.10.1
+black==24.4.2
+python-dotenv==1.0.1
