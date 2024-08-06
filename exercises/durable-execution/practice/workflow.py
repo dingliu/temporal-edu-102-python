@@ -23,9 +23,7 @@ class TranslationWorkflow:
             language_code=input.language_code, term="hello"
         )
 
-        # TODO Add a log message using the workflow logger at the debug level
-        # stating that the Activity has been invoked. Include the term and
-        # language code.
+        workflow.logger.debug(f"Invoking translate_term activity with {hello_input}")
         hello_result = await workflow.execute_activity_method(
             TranslationActivities.translate_term,
             hello_input,
@@ -33,16 +31,13 @@ class TranslationWorkflow:
         )
         hello_message = f"{hello_result.translation}, {input.name}"
 
-        # TODO Add a log message using the workflow logger stating that the
-        # Workflow is sleeping between translation calls
+        workflow.logger.info("Sleeping between translation calls")
+        await asyncio.sleep(10)
 
-        # TODO Add a Timer that sleeps for 10 seconds
-
-        # TODO Add a log message using the workflow logger at the debug level
-        # stating that the Activity has been invoked. Include the term and language code.
         goodbye_input = TranslationActivityInput(
             language_code=input.language_code, term="goodbye"
         )
+        workflow.logger.debug(f"Invoking translate_term activity with {goodbye_input}")
         goodbye_result = await workflow.execute_activity_method(
             TranslationActivities.translate_term,
             goodbye_input,
